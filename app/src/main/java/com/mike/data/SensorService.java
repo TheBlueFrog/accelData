@@ -12,7 +12,7 @@ import android.util.Log;
 public class SensorService extends Service {
     public static final String TAG = SensorService.class.getSimpleName();
 
-    private MyListener myListener = null;
+    static private MyListener myListener = null;
 
     public int counter=0;
 //    public SensorService(Context applicationContext) {
@@ -22,17 +22,18 @@ public class SensorService extends Service {
 //        myListener = new MyListener(context);
 //    }
 
-    public SensorService() {
-//        Context application = getApplicationContext();
-//        myListener = new MyListener(this);
-    }
+//    public SensorService() {
+//        // can't use 'this' yet to construct a listener
+//    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         Log.i(TAG + ".onStartCommand", "");
-        myListener = new MyListener(this);
-        myListener.start();
+        if (myListener == null) {
+            myListener = new MyListener(this);
+            myListener.start();
+        }
         return START_STICKY;
     }
 
@@ -46,6 +47,7 @@ public class SensorService extends Service {
 
         if (myListener != null) {
             myListener.stop();
+            myListener = null;
         }
     }
 

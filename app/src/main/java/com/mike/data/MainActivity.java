@@ -42,13 +42,13 @@ public class MainActivity extends AppCompatActivity {
 //        mSensorService = new SensorService(this);
         mServiceIntent = new Intent(this, SensorService.class);
 
-        if (!isMyServiceRunning(SensorService.class)) {
-            Log.i (TAG + ".onCreate","Service not running, start it");
+//        if (!isMyServiceRunning(SensorService.class)) {
+//            Log.i (TAG + ".onCreate","Service not running, start it");
             startService(mServiceIntent);
-        }
-        else {
-            Log.i (TAG + ".onCreate","Service is already running");
-        }
+//        }
+//        else {
+//            Log.i (TAG + ".onCreate","Service is already running");
+//        }
     }
 
     private boolean isMyServiceRunning(Class<?> serviceClass) {
