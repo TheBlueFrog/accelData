@@ -6,32 +6,17 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-/**
- * Created by fabio on 30/01/2016.
- */
 public class SensorService extends Service {
     public static final String TAG = SensorService.class.getSimpleName();
 
-    static private MyListener myListener = null;
-
-    public int counter=0;
-//    public SensorService(Context applicationContext) {
-//        super();
-//        Log.i(TAG + ".ctor", "service constructor");
-//        this.context = applicationContext;
-//        myListener = new MyListener(context);
-//    }
-
-//    public SensorService() {
-//        // can't use 'this' yet to construct a listener
-//    }
+    static private AccelerometerSensorListener myListener = null;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         Log.i(TAG + ".onStartCommand", "");
         if (myListener == null) {
-            myListener = new MyListener(this);
+            myListener = new AccelerometerSensorListener(this);
             myListener.start();
         }
         return START_STICKY;

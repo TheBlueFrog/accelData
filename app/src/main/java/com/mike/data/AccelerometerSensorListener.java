@@ -9,14 +9,14 @@ import android.util.Log;
 
 import static android.content.Context.SENSOR_SERVICE;
 
-class MyListener  implements SensorEventListener {
-    static private final String TAG = MyListener.class.getSimpleName();
+class AccelerometerSensorListener implements SensorEventListener {
+    static private final String TAG = AccelerometerSensorListener.class.getSimpleName();
 
     private Context context;
     private SensorManager mSensorManager;
     private Sensor mSensor;
 
-    public MyListener(Context context) {
+    public AccelerometerSensorListener(Context context) {
         this.context = context;
         mSensorManager = (SensorManager) context.getSystemService(SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -32,7 +32,7 @@ class MyListener  implements SensorEventListener {
 
     public void start() {
         Log.i(TAG + ".start", "");
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_GAME);
+        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_UI);
         getPersistence().setCollecting(true);
     }
 
